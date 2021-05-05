@@ -9,8 +9,6 @@ import java.lang.Exception
 import java.util.*
 
 class VocaViewModel(application: Application) : AndroidViewModel(application){
-    // file path of text file
-    private val filePath: String = "word.txt"
     private val TAG = "VocaViewModel"
 
     // words list [ eng : kor(meaning) = 1 : n ]
@@ -24,14 +22,21 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         }catch (e: Exception) {
             Log.e(TAG, "사용자가 추가한 단어 없음")
         }
-        val scan1 = Scanner(application.resources.openRawResource(R.raw.word))
+        val scan1 = Scanner(application.resources.openRawResource(R.raw.words))
         readFile(scan1)
 
         words.forEach {
             engs.add(it.eng)
         }
     }
-    fun readFile(scan: Scanner) {
+
+    fun search(target: String): List<Voca> {
+        return words.filter {
+            it.eng == target
+        }
+    }
+
+    private fun readFile(scan: Scanner) {
         while(scan.hasNext()){
             val input = scan.nextLine()
             val splitInput = input.split(":")

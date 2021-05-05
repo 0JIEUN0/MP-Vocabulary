@@ -39,6 +39,25 @@ class SearchFragment : Fragment() {
                     android.R.layout.simple_dropdown_item_1line,
                     vocaViewModel.engs)
             )
+
+            it.searchBtn.setOnClickListener {
+                val searchWord = binding!!.inputSearch.text.toString()
+                val result = vocaViewModel.search(searchWord)
+                var str = ""
+                if(result.isEmpty()){
+                    str = "검색 결과가 없습니다."
+                }
+                else {
+                    str = "$searchWord\n"
+                    if(result.size != 1) {
+                        Log.e(TAG, "Warn: Searching English word must find EXACTLY one or 0!")
+                    }
+                    result[0].kor.forEach {
+                        str += "- $it \n"
+                    }
+                }
+                binding!!.searchResult.text = str
+            }
         } ?: Log.e(TAG, "Error: Binding is null")
     }
 }
