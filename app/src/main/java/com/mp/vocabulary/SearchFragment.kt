@@ -15,6 +15,7 @@ class SearchFragment : Fragment() {
     var binding: FragmentSearchBinding? = null
     val vocaViewModel: VocaViewModel by activityViewModels()
     private val TAG = "SEARCH FRAGMENT"
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
@@ -31,11 +32,13 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e(TAG, "this------------------>" + vocaViewModel.words[0].eng)
-        binding!!.inputSearch.setAdapter(
-            ArrayAdapter(requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
-            vocaViewModel.words)
-        )
+        binding?.let {
+            it.inputSearch.setAdapter(
+                ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_dropdown_item_1line,
+                    vocaViewModel.engs)
+            )
+        } ?: Log.e(TAG, "Error: Binding is null")
     }
 }

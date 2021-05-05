@@ -15,6 +15,7 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
 
     // words list [ eng : kor(meaning) = 1 : n ]
     val words: MutableList<Voca> = mutableListOf<Voca>()
+    val engs: MutableList<String> = mutableListOf<String>()
 
     init {
         try {
@@ -25,6 +26,10 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         }
         val scan1 = Scanner(application.resources.openRawResource(R.raw.word))
         readFile(scan1)
+
+        words.forEach {
+            engs.add(it.eng)
+        }
     }
     fun readFile(scan: Scanner) {
         while(scan.hasNext()){
