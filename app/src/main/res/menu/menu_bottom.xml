@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/searchMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="검색"
+        app:cnb_iconColor="@color/dark_beige"
+        app:cnb_iconTintMode="src_in" />
+
+    <item
+        android:id="@+id/quizMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_app_quiz_24"
+        android:title="퀴즈"
+        app:cnb_textColor="@color/black"
+        app:cnb_iconColor="@color/dark_red"
+        app:cnb_iconTintMode="src_in"
+         />
+
+    <item
+        android:id="@+id/transMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_transform_24"
+        android:title="번역"
+        app:cnb_iconColor="@color/cyan"
+        app:cnb_iconTintMode="src_in" />
+
+    <item
+        android:id="@+id/myPageMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="설정"
+        app:cnb_iconColor="@color/dark_gray"
+        app:cnb_iconTintMode="src_in" />
+
+</menu>
