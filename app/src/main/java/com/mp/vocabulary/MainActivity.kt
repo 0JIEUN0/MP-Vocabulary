@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             var fragment: Fragment? = null
             when(id) {
                 R.id.searchMenu -> fragment = SearchFragment()
-                R.id.quizMenu -> fragment = QuizFragment()
+                R.id.quizMenu -> fragment = StudyFragment()
                 R.id.transMenu -> fragment = TranslationFragment()
                 R.id.myPageMenu -> fragment = MypageFragment()
             }

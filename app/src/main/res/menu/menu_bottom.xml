@@ -14,7 +14,7 @@
         android:id="@+id/quizMenu"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_app_quiz_24"
-        android:title="퀴즈"
+        android:title="학습"
         app:cnb_textColor="@color/black"
         app:cnb_iconColor="@color/dark_red"
         app:cnb_iconTintMode="src_in"
