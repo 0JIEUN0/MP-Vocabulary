@@ -52,7 +52,7 @@
         android:id="@+id/transBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_transform_24"
+        android:src="@drawable/ic_baseline_autorenew_24"
         android:backgroundTint="@color/cyan"
         android:layout_gravity="center"/>
 
