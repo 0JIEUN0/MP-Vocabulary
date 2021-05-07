@@ -11,17 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="번역"
-        android:gravity="center"
+        android:layout_margin="20dp"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textColor="@color/cyan"/>
+        android:textColor="@color/dark_beige"
+        />
 
-    <Spinner
-        android:id="@+id/spinner"
+    <ToggleButton
+        android:id="@+id/toggleBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-
+        android:textOff="한국어"
+        android:textOn="영어"
+        android:background="@drawable/box2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="-10dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -30,10 +34,9 @@
         app:counterEnabled="true"
         app:counterMaxLength="5000"
         android:layout_margin="20dp"
-        app:boxStrokeColor="@color/cyan"
-        app:boxStrokeWidth="3dp"
+        android:background="@drawable/box1"
         app:boxStrokeErrorColor="@color/dark_red"
-        app:boxBackgroundColor="#00000000"
+        app:boxBackgroundMode="none"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputText"
@@ -50,10 +53,13 @@
 
     <ImageButton
         android:id="@+id/transBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:tint="@color/dark_beige"
         android:src="@drawable/ic_baseline_autorenew_24"
-        android:backgroundTint="@color/cyan"
+        android:scaleType="fitCenter"
+        android:background="@drawable/box2"
         android:layout_gravity="center"/>
 
     <ProgressBar
@@ -62,6 +68,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"/>
+
+    <ToggleButton
+        android:id="@+id/toggleBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="영어"
+        android:textOn="한국어"
+        android:background="@drawable/box2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="-10dp"
+        android:textColor="@color/dark_gray"
+        android:enabled="false"/>
 
     <TextView
         android:id="@+id/transResultText"
@@ -73,6 +91,7 @@
         android:padding="20dp"
         android:textSize="20dp"
         android:textColor="@color/dark_gray"
+        android:background="@drawable/box1"
         />
 
 </LinearLayout>

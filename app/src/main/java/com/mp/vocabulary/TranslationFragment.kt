@@ -47,6 +47,7 @@ class TranslationFragment : Fragment() {
 
     private fun init(){
         binding!!.apply {
+            /*
             spinner.prompt = "언어 선택"
             spinner.adapter = context?.let {
                 ArrayAdapter<String>(
@@ -56,11 +57,16 @@ class TranslationFragment : Fragment() {
                 )
             }
 
+             */
+            toggleBtn.setOnCheckedChangeListener { button, isChecked ->
+                toggleBtn2.isChecked = isChecked
+            }
+
             transBtn.setOnClickListener {
                 if(inputText.text.toString() == ""){
                     Toast.makeText(context, "번역할 문장이 없습니다.", Toast.LENGTH_LONG).show()
                 } else {
-                    val sourceCode: CODE = if(spinner.selectedItem.toString() == "한국어") CODE.ko else CODE.en
+                    val sourceCode: CODE = if(toggleBtn.isChecked) CODE.en else CODE.ko
                     val targetCode: CODE = if(sourceCode == CODE.ko) CODE.en else CODE.ko
                     translation(
                         sourceCode = sourceCode.toString(),
