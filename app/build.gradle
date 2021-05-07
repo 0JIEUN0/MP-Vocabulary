@@ -3,6 +3,9 @@ plugins {
     id 'kotlin-android'
 }
 
+def Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -15,6 +18,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "PAPAGO_ID", properties['papago.id']
+        buildConfigField "String", "PAPAGO_SECREAT", properties['papago.secret']
     }
 
     buildTypes {
@@ -55,4 +61,6 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.13.1'
 
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 }
