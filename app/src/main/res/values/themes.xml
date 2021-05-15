@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MPVocabulary" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/beige</item>
+        <item name="colorPrimary">@color/yellow_500</item>
         <item name="colorPrimaryVariant">@color/cyan</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
