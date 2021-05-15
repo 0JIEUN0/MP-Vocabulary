@@ -3,6 +3,7 @@ package com.mp.vocabulary.viewmodel
 import android.app.Application
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.mp.vocabulary.BuildConfig
@@ -15,6 +16,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 import java.util.*
+
+enum class FragmentRequest {
+    REQUEST_QUIZ1, REQUEST_QUIZ2, REQUEST_NOTE, REQUEST_STAR
+}
 
 class VocaViewModel(application: Application) : AndroidViewModel(application){
     private val TAG = "VocaViewModel"
@@ -30,6 +35,9 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
     val searchResultMeaning: MutableLiveData<String> = MutableLiveData<String>()
     val isSearchFind: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val translatedString: MutableLiveData<String> = MutableLiveData<String>()
+
+    // fragment translation
+    val fragmentRequest: MutableLiveData<FragmentRequest> = MutableLiveData<FragmentRequest>()
 
     init {
         try {
@@ -48,6 +56,10 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         if(!RetrofitServerManage.initRetrofit()){
             Log.e(TAG, "Server init failed...")
         } else Log.e(TAG, "Server init success!")
+    }
+
+    fun fragmentTranslationRequest(target: FragmentRequest){
+        fragmentRequest.value = target
     }
 
     fun search(target: String) {

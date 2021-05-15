@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.mp.vocabulary.R
 import com.mp.vocabulary.databinding.ActivityMainBinding
+import com.mp.vocabulary.viewmodel.FragmentRequest
 import com.mp.vocabulary.viewmodel.VocaViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -20,11 +21,26 @@ class MainActivity : AppCompatActivity() {
 
         init()
         initViewModel()
+
+        binding.menuBottom.setItemSelected(R.id.searchMenu, true)
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, SearchFragment())
+                .commit()
     }
 
     private fun initViewModel() {
         viewModel.fragmentRequest.observe(this) {
-            //fragment = when(it){ }
+            fragment = when(it){
+                FragmentRequest.REQUEST_QUIZ1 -> Quiz1Fragment()
+                FragmentRequest.REQUEST_QUIZ2 -> Quiz2Fragment()
+                FragmentRequest.REQUEST_NOTE -> NoteFragment()
+                FragmentRequest.REQUEST_STAR -> StarFragment()
+            }
+
+            val fragmentTranslation = supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment!!)
+            fragmentTranslation.addToBackStack(null)
+            fragmentTranslation.commit()
         }
     }
 
@@ -42,11 +58,5 @@ class MainActivity : AppCompatActivity() {
                     .commit()
             } ?: Log.d("ERROR", "Error:: can't make new fragment")
         }
-
-        binding.menuBottom.setItemSelected(R.id.searchMenu, true)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, SearchFragment())
-            .commit()
-
     }
 }
