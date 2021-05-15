@@ -21,8 +21,8 @@ import kotlinx.coroutines.withContext
 
 class TranslationFragment : Fragment() {
     var binding: FragmentTranslationBinding? = null
-    val scope = CoroutineScope(Dispatchers.Main)
     val TAG = "TranslationFragment"
+    val viewModel: VocaViewModel by activityViewModels()
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -41,11 +41,15 @@ class TranslationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(!RetrofitServerManage.initRetrofit()){
-            Log.e(TAG, "Server init failed...")
-        }
-
         init()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        viewModel.translatedString.observe(viewLifecycleOwner) {
+            binding!!.progressBar.visibility = View.GONE
+            binding!!.transResultText.text = it
+        }
     }
 
     private fun init(){
@@ -58,37 +62,16 @@ class TranslationFragment : Fragment() {
                 if(inputText.text.toString() == ""){
                     Toast.makeText(context, "번역할 문장이 없습니다.", Toast.LENGTH_LONG).show()
                 } else {
+                    binding!!.progressBar.visibility = View.VISIBLE
                     val sourceCode: CODE = if(toggleBtn.isChecked) CODE.en else CODE.ko
                     val targetCode: CODE = if(sourceCode == CODE.ko) CODE.en else CODE.ko
-                    translation(
+                    viewModel.translation(
                         sourceCode = sourceCode.toString(),
                         targetCode = targetCode.toString(),
                         str = inputText.text.toString()
                     )
                 }
             }
-        }
-    }
-
-    private fun translation(sourceCode: String, targetCode: String, str: String) {
-        binding!!.progressBar.visibility = View.VISIBLE
-        scope.launch {
-            val headers: HashMap<String, Any> = HashMap()
-            with(headers) {
-                put("X-Naver-Client-Id", BuildConfig.PAPAGO_ID)
-                put("X-Naver-Client-Secret", BuildConfig.PAPAGO_SECREAT)
-            }
-            var translatedString: String =
-                    withContext(Dispatchers.IO) {
-                        RetrofitServerManage.translation(
-                                headers = headers,
-                                source = sourceCode,
-                                target = targetCode,
-                                text = str
-                )
-            }
-            binding!!.progressBar.visibility = View.GONE
-            binding!!.transResultText.text = translatedString
         }
     }
 }

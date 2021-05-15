@@ -2,18 +2,34 @@ package com.mp.vocabulary.viewmodel
 
 import android.app.Application
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import com.mp.vocabulary.BuildConfig
 import com.mp.vocabulary.R
 import com.mp.vocabulary.data.Voca
+import com.mp.vocabulary.server.RetrofitServerManage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 import java.util.*
 
 class VocaViewModel(application: Application) : AndroidViewModel(application){
     private val TAG = "VocaViewModel"
 
+    val scope = CoroutineScope(Dispatchers.Main)
+
     // words list [ eng : kor(meaning) = 1 : n ]
     val words: MutableList<Voca> = mutableListOf<Voca>()
     val engs: MutableList<String> = mutableListOf<String>()
+
+    // live data
+    val searchResultWord: MutableLiveData<String> = MutableLiveData<String>()
+    val searchResultMeaning: MutableLiveData<String> = MutableLiveData<String>()
+    val isSearchFind: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val translatedString: MutableLiveData<String> = MutableLiveData<String>()
 
     init {
         try {
@@ -28,11 +44,36 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         words.forEach {
             engs.add(it.eng)
         }
+
+        if(!RetrofitServerManage.initRetrofit()){
+            Log.e(TAG, "Server init failed...")
+        } else Log.e(TAG, "Server init success!")
     }
 
-    fun search(target: String): List<Voca> {
-        return words.filter {
+    fun search(target: String) {
+        val result: List<Voca> = words.filter {
             it.eng == target
+        }
+        searchResultWord.value = target
+
+        if(result.isEmpty()){
+            searchResultMeaning.value = "검색 결과가 없습니다."
+            isSearchFind.value = false
+        }
+        else {
+            if(result.size != 1) {
+                searchResultMeaning.value = "검색 결과가 없습니다."
+                isSearchFind.value = false
+                Log.e(TAG, "Warn: Searching English word must find EXACTLY one or 0!")
+            }
+            else {
+                var resultMeanings = ""
+                result[0].kor.forEach {
+                    resultMeanings += "✅ $it \n"
+                }
+                searchResultMeaning.value = resultMeanings
+                isSearchFind.value = true
+            }
         }
     }
 
@@ -46,4 +87,25 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         scan.close()
     }
 
+
+    fun translation(sourceCode: String, targetCode: String, str: String) {
+        scope.launch {
+            val headers: HashMap<String, Any> = HashMap()
+            with(headers) {
+                put("X-Naver-Client-Id", BuildConfig.PAPAGO_ID)
+                put("X-Naver-Client-Secret", BuildConfig.PAPAGO_SECREAT)
+            }
+            var response: String =
+                    withContext(Dispatchers.IO) {
+                        RetrofitServerManage.translation(
+                                headers = headers,
+                                source = sourceCode,
+                                target = targetCode,
+                                text = str
+                        )
+                    }
+            //binding!!.progressBar.visibility = View.GONE
+            translatedString.value = response
+        }
+    }
 }

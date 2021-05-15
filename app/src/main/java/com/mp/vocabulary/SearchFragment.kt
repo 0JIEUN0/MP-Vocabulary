@@ -15,7 +15,7 @@ import java.util.*
 
 class SearchFragment : Fragment() {
     var binding: FragmentSearchBinding? = null
-    val vocaViewModel: VocaViewModel by activityViewModels()
+    val viewModel: VocaViewModel by activityViewModels()
     private val TAG = "SEARCH FRAGMENT"
     lateinit var tts: TextToSpeech
     var isTtsReady = false
@@ -45,6 +45,7 @@ class SearchFragment : Fragment() {
 
         initTts()
         init()
+        initViewModel()
     }
 
     private fun initTts() {
@@ -54,46 +55,40 @@ class SearchFragment : Fragment() {
         })
     }
 
-    fun init() {
-        binding?.let {
-            it.inputSearch.setAdapter(
+    private fun init() {
+        binding!!.apply {
+            inputSearch.setAdapter(
                     ArrayAdapter(
                             requireContext(),
                             android.R.layout.simple_dropdown_item_1line,
-                            vocaViewModel.engs)
+                            viewModel.engs)
             )
 
-            it.searchBtn.setOnClickListener {
+            searchBtn.setOnClickListener {
                 val searchWord = binding!!.inputSearch.text.toString()
-                val result = vocaViewModel.search(searchWord)
-                var resultWord = searchWord
-                var resultMeaning = ""
-                if(result.isEmpty()){
-                    resultMeaning = "검색 결과가 없습니다."
-                    binding!!.readWordBtn.visibility = View.GONE
-                }
-                else {
-                    if(result.size != 1) {
-                        resultMeaning = "검색 결과가 없습니다."
-                        Log.e(TAG, "Warn: Searching English word must find EXACTLY one or 0!")
-                        binding!!.readWordBtn.visibility = View.GONE
-                    }
-                    else {
-                        binding!!.readWordBtn.visibility = View.VISIBLE
-                        result[0].kor.forEach {
-                            resultMeaning += "✅✅ $it \n"
-                        }
-                    }
-                }
-
-                binding!!.searchResultWord.text = resultWord
-                binding!!.searchResultMeaning.text = resultMeaning
+                viewModel.search(searchWord)
             }
 
-            it.readWordBtn.setOnClickListener {
+            readWordBtn.setOnClickListener {
                 tts.speak(binding!!.searchResultWord.text, TextToSpeech.QUEUE_ADD, null, null)
             }
 
-        } ?: Log.e(TAG, "Error: Binding is null")
+        }
     }
+
+    private fun initViewModel() {
+        viewModel.apply {
+            searchResultWord.observe(viewLifecycleOwner) {
+                binding!!.searchResultWord.text = it
+            }
+            searchResultMeaning.observe(viewLifecycleOwner) {
+                binding!!.searchResultMeaning.text = it
+            }
+            isSearchFind.observe(viewLifecycleOwner) {
+                if (it) binding!!.readWordBtn.visibility = View.VISIBLE
+                else binding!!.readWordBtn.visibility = View.GONE
+            }
+        }
+    }
+
 }
