@@ -93,7 +93,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:padding="10dp"
-        android:tint="@color/dark_beige"
+        android:tint="@color/beige"
         android:src="@drawable/ic_baseline_autorenew_24"
         android:scaleType="fitCenter"
         android:background="@drawable/box2"

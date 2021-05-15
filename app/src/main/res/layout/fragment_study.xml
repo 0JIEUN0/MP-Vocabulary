@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="주관식"
+                        android:text="단어 맞추기"
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="@color/dark_gray"/>
