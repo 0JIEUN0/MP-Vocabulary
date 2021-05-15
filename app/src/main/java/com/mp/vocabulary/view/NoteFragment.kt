@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mp.vocabulary.databinding.FragmentQuizBinding
+import com.mp.vocabulary.databinding.FragmentNoteBinding
 
-class QuizFragment : Fragment() {
-    var binding: FragmentQuizBinding? = null
+class NoteFragment : Fragment() {
+    var binding: FragmentNoteBinding? = null
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -18,9 +18,10 @@ class QuizFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        binding = FragmentQuizBinding.inflate(layoutInflater, container, false)
+        binding = FragmentNoteBinding.inflate(layoutInflater, container, false)
         return binding!!.root
     }
+
 }
