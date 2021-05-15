@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.mp.vocabulary.BuildConfig
 import com.mp.vocabulary.R
+import com.mp.vocabulary.data.QuizVoca
 import com.mp.vocabulary.data.Voca
 import com.mp.vocabulary.server.RetrofitServerManage
 import kotlinx.coroutines.CoroutineScope
@@ -36,6 +37,9 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
     val isSearchFind: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val translatedString: MutableLiveData<String> = MutableLiveData<String>()
 
+    val isQuizOk: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val wordListForQuiz: MutableLiveData<List<QuizVoca>> = MutableLiveData()
+
     // fragment translation
     val fragmentRequest: MutableLiveData<FragmentRequest> = MutableLiveData<FragmentRequest>()
 
@@ -56,6 +60,38 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         if(!RetrofitServerManage.initRetrofit()){
             Log.e(TAG, "Server init failed...")
         } else Log.e(TAG, "Server init success!")
+    }
+
+    fun makeQuiz(num: Int) {
+        val random: Random = Random()
+        val copyList = words.toMutableList()
+        val quizWordList: MutableList<Voca> = mutableListOf<Voca>()
+
+        for(i in 1 .. num){
+            val idx = random.nextInt(copyList.size)
+            quizWordList.add(copyList.removeAt(idx))
+        }
+
+        val quizList: MutableList<QuizVoca> = mutableListOf<QuizVoca>()
+        quizWordList.forEach {
+            val eng = it.eng
+            val kor = it.kor[random.nextInt(it.kor.size)]
+            val others = mutableListOf<String>()
+            for(i in 1 .. 3){
+                // 3개의 정답이 아닌 보기
+                val str = copyList[random.nextInt(copyList.size)].kor[0]
+                others.add(str)
+            }
+            quizList.add(
+                QuizVoca(
+                    eng = eng,
+                    kor = kor,
+                    others = others
+            ))
+        }
+        wordListForQuiz.value = quizList.toMutableList()
+        isQuizOk.value = true
+
     }
 
     fun fragmentTranslationRequest(target: FragmentRequest){

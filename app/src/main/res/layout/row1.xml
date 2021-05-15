@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/box1"
+    android:paddingHorizontal="20dp"
+    android:layout_margin="5dp">
+
+    <TextView
+        android:id="@+id/eng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="apple"
+        android:textColor="@color/dark_gray"
+        />
+
+    <TextView
+        android:id="@+id/kor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/dark_red"
+        android:text="사과"
+        android:gravity="right"
+        />
+
+
+</LinearLayout>
