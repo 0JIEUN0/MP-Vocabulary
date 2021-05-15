@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.mp.vocabulary.databinding.FragmentTranslationBinding
 import com.mp.vocabulary.server.RetrofitServerManage
 import com.mp.vocabulary.server.data.CODE
 import com.mp.vocabulary.server.data.TranslationResponse
+import com.mp.vocabulary.viewmodel.VocaViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +23,7 @@ class TranslationFragment : Fragment() {
     var binding: FragmentTranslationBinding? = null
     val scope = CoroutineScope(Dispatchers.Main)
     val TAG = "TranslationFragment"
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
@@ -47,17 +50,6 @@ class TranslationFragment : Fragment() {
 
     private fun init(){
         binding!!.apply {
-            /*
-            spinner.prompt = "언어 선택"
-            spinner.adapter = context?.let {
-                ArrayAdapter<String>(
-                    it,
-                    android.R.layout.simple_dropdown_item_1line,
-                    arrayListOf("한국어", "영어")
-                )
-            }
-
-             */
             toggleBtn.setOnCheckedChangeListener { button, isChecked ->
                 toggleBtn2.isChecked = isChecked
             }
@@ -83,21 +75,20 @@ class TranslationFragment : Fragment() {
         scope.launch {
             val headers: HashMap<String, Any> = HashMap()
             with(headers) {
-                //put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
                 put("X-Naver-Client-Id", BuildConfig.PAPAGO_ID)
                 put("X-Naver-Client-Secret", BuildConfig.PAPAGO_SECREAT)
             }
-            var response: TranslationResponse? = null
-            withContext(Dispatchers.IO) {
-                response = RetrofitServerManage.translation(
-                    headers = headers,
-                    source = sourceCode,
-                    target = targetCode,
-                    text = str
+            var translatedString: String =
+                    withContext(Dispatchers.IO) {
+                        RetrofitServerManage.translation(
+                                headers = headers,
+                                source = sourceCode,
+                                target = targetCode,
+                                text = str
                 )
             }
             binding!!.progressBar.visibility = View.GONE
-            binding!!.transResultText.text = response?.translatedText
+            binding!!.transResultText.text = translatedString
         }
     }
 }

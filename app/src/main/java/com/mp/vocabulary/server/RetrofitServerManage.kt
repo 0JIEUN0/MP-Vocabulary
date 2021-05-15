@@ -1,6 +1,7 @@
 package com.mp.vocabulary.server
 
 import android.util.Log
+import com.mp.vocabulary.server.data.TranslationRequest
 import com.mp.vocabulary.server.data.TranslationResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -34,19 +35,24 @@ object RetrofitServerManage {
                     source: String,
                     target: String,
                     text: String
-    ): TranslationResponse? {
+    ): String {
         val transFunc: Call<TranslationResponse>? = apiInterface?.papagoTranslation(
             headerMap = headers,
-            sourceId = source,
-            targetId = target,
-            text = text
+            request = TranslationRequest(
+                    source = source,
+                    target = target,
+                    text = text
+            )
         )
 
         val response: Response<TranslationResponse>? = transFunc?.execute()
-        if(response!!.isSuccessful) return response.body()!!
+
+        if(response!!.isSuccessful) {
+            return response.body()!!.message.result.translatedText
+        }
         else {
             Log.e(TAG, response.errorBody()!!.string())
         }
-        return null
+        return ""
     }
 }
