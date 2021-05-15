@@ -1,8 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Quiz2Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.Quiz2Fragment"
+    android:orientation="vertical">
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box3"
+        android:text="듣기 평가"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/dark_red"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:padding="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="눌러서 영단어의 발음을 듣고 뜻을 맞추세요!"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
+
+    <!-- setting layout : choose number of quiz -->
+    <LinearLayout
+        android:id="@+id/settingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/box1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문제 개수 선택"
+            android:textSize="20dp"
+            android:textColor="@color/dark_gray"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip5"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5문제"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"
+                />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip10"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10문제"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip15"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15문제"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"/>
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/startBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text ="시작하기"
+            android:backgroundTint="@color/beige"
+            android:paddingHorizontal="20dp"
+            android:layout_margin="100dp"/>
+
+    </LinearLayout>
+
+    <!-- quiz layout : quiz -->
+    <LinearLayout
+        android:id="@+id/quizLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/box1"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/progressNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:text="3 / 10"
+            android:textSize="15dp"
+            android:textColor="@color/dark_red"/>
+
+        <ImageView
+            android:id="@+id/soundBtn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="50dp"
+            android:src="@drawable/ic_baseline_volume_up_24"
+            android:background="@drawable/box3"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:gravity="center"
+            />
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            android:layout_marginHorizontal="30dp"
+            >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip1"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5문제"
+                android:textSize="15dp"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"
+                />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip2"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10문제"
+                android:textSize="15dp"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip3"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="15문제"
+                android:textSize="15dp"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip4"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="15문제"
+                android:textSize="15dp"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"/>
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/chooseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="다음"
+            android:backgroundTint="@color/beige"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <!-- result layout : show result of quiz -->
+    <LinearLayout
+        android:id="@+id/resultLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/box1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/box3"
+            android:layout_margin="20dp"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="맞은 개수"
+                android:textSize="25dp"
+                android:textColor="@color/dark_gray"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/resultNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5개"
+                android:textSize="40dp"
+                android:textColor="@color/dark_red"
+                android:gravity="center"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wrongRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/box3"
+            android:layout_marginHorizontal="20dp"
+            android:padding="20dp"
+            android:visibility="gone"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/addNoteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오답노트에 등록"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/beige"
+                />
+            <Button
+                android:id="@+id/finishBtn"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="종료"
+                android:backgroundTint="@color/beige"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
