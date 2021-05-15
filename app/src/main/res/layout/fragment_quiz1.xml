@@ -26,6 +26,7 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"/>
 
+    <!-- setting layout : choose number of quiz -->
     <LinearLayout
         android:id="@+id/settingLayout"
         android:layout_width="match_parent"
@@ -92,6 +93,7 @@
 
     </LinearLayout>
 
+    <!-- quiz layout : quiz -->
     <LinearLayout
         android:id="@+id/quizLayout"
         android:layout_width="match_parent"
@@ -188,6 +190,7 @@
 
     </LinearLayout>
 
+    <!-- result layout : show result of quiz -->
     <LinearLayout
         android:id="@+id/resultLayout"
         android:layout_width="match_parent"
@@ -224,7 +227,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wrongRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@drawable/box3"
             android:layout_marginHorizontal="20dp"
             android:padding="20dp"
