@@ -1,23 +1,15 @@
-package com.mp.vocabulary
+package com.mp.vocabulary.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.mp.vocabulary.databinding.FragmentTranslationBinding
-import com.mp.vocabulary.server.RetrofitServerManage
 import com.mp.vocabulary.server.data.CODE
-import com.mp.vocabulary.server.data.TranslationResponse
 import com.mp.vocabulary.viewmodel.VocaViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class TranslationFragment : Fragment() {
     var binding: FragmentTranslationBinding? = null

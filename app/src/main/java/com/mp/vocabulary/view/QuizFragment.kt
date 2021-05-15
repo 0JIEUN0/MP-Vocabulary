@@ -1,4 +1,4 @@
-package com.mp.vocabulary
+package com.mp.vocabulary.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

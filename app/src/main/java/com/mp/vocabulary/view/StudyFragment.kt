@@ -1,4 +1,4 @@
-package com.mp.vocabulary
+package com.mp.vocabulary.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,7 +18,7 @@ class StudyFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentStudyBinding.inflate(layoutInflater, container, false)
         return binding!!.root
@@ -26,5 +26,23 @@ class StudyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding!!.apply {
+            quiz1.setOnClickListener {
+                // 주관식 퀴즈
+            }
+
+            quiz2.setOnClickListener {
+                // 듣기 평가
+            }
+
+            wrongNote.setOnClickListener {
+                // 오답노트
+            }
+
+            star.setOnClickListener {
+                // 즐겨찾기
+            }
+        }
     }
 }
