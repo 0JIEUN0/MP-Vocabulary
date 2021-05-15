@@ -10,25 +10,57 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="번역"
-        android:layout_margin="20dp"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/dark_beige"
+        android:background="@drawable/box3"
+        android:text="번역하기"
+        android:textSize="20dp"
         android:gravity="center"
-        />
+        android:textStyle="bold"
+        android:textColor="@color/cyan"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"/>
 
-    <ToggleButton
-        android:id="@+id/toggleBtn"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOff="한국어"
-        android:textOn="영어"
-        android:background="@drawable/box2"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="-10dp"
+        android:text="번역할 언어를 선택하고, 번역 버튼을 누르세요!"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center"
-        />
+        android:layout_marginVertical="5dp">
+
+        <ToggleButton
+            android:id="@+id/toggleBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="한국어"
+            android:textOn="영어"
+            android:background="@drawable/box1"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="➡"
+            android:textSize="20dp"
+            android:layout_marginHorizontal="20dp"/>
+        <ToggleButton
+            android:id="@+id/toggleBtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="영어"
+            android:textOn="한국어"
+            android:background="@drawable/box1"
+            android:textColor="@color/dark_gray"
+            android:enabled="false"/>
+
+    </LinearLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -36,7 +68,8 @@
         android:layout_weight="1"
         app:counterEnabled="true"
         app:counterMaxLength="5000"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:background="@drawable/box1"
         app:boxStrokeErrorColor="@color/dark_red"
         app:boxBackgroundMode="none"
@@ -51,13 +84,14 @@
             android:gravity="start"
             android:textColor="@color/dark_gray"
             android:textAlignment="viewStart"
+            android:hint="번역할 문장을 입력하세요."
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/transBtn"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:padding="10dp"
         android:tint="@color/dark_beige"
         android:src="@drawable/ic_baseline_autorenew_24"
@@ -72,23 +106,13 @@
         android:layout_gravity="center"
         android:visibility="gone"/>
 
-    <ToggleButton
-        android:id="@+id/toggleBtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textOff="영어"
-        android:textOn="한국어"
-        android:background="@drawable/box2"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="-10dp"
-        android:textColor="@color/dark_gray"
-        android:enabled="false"/>
 
     <TextView
         android:id="@+id/transResultText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_weight="1"
         android:text=""
         android:padding="20dp"

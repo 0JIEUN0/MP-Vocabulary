@@ -2,10 +2,16 @@
 <resources>
     <color name="beige">#DBC6A9</color>
     <color name="dark_beige">#826133</color>
+    <color name="base_beige">#DFDBD5</color>
+    <color name="base_white">#F4F2EE</color>
+    <color name="base_yellow">#EDE6DD</color>
+    <color name="yellow_500">#E4A752</color>
+    <color name="yellow_300">#E3B26D</color>
+    <color name="yellow_200">#FCDDB1</color>
     <color name="dark_red">#AB4A37</color>
     <color name="sky_blue">#85D9F1</color>
     <color name="cyan">#347385</color>
-    <color name="dark_gray">#4F514E</color>
+    <color name="dark_gray">#8B8C8A</color>
     <color name="gray">#C4C4C4</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
