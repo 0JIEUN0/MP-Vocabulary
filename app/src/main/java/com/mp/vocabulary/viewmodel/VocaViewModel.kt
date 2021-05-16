@@ -102,6 +102,21 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         return true
     }
 
+    fun insertToStar(eng: String): Boolean{
+        val data: Voca = words.filter {
+            it.eng == eng
+        }[0]
+
+        if(starWordList.contains(data)) return false
+        val eng = data.eng
+        data.kor.forEach {
+            vocaDBHelper.insertVoca(DBTable.NOTE, eng, it)
+        }
+        starWordList.add(data)
+        starWordListLiveData.value = starWordList
+        return true
+    }
+
     fun insertToNote(eng: String): Boolean {
         val data: Voca = words.filter {
             it.eng == eng
@@ -172,7 +187,7 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
             else {
                 var resultMeanings = ""
                 result[0].kor.forEach {
-                    resultMeanings += "✅ $it \n"
+                    resultMeanings += "✔ $it \n"
                 }
                 searchResultMeaning.value = resultMeanings
                 isSearchFind.value = true

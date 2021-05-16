@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.mp.vocabulary.databinding.FragmentSearchBinding
 import com.mp.vocabulary.viewmodel.VocaViewModel
@@ -72,6 +73,15 @@ class SearchFragment : Fragment() {
                 tts.speak(binding!!.searchResultWord.text, TextToSpeech.QUEUE_ADD, null, null)
             }
 
+            addStarBtn.setOnClickListener {
+                // 즐겨 찾기에 등록
+                if(viewModel.insertToStar(binding!!.searchResultWord.text.toString())){
+                    Toast.makeText(context, "즐겨찾기에 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "이미 즐겨찾기에 등록된 단어입니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     }
 
@@ -84,8 +94,14 @@ class SearchFragment : Fragment() {
                 binding!!.searchResultMeaning.text = it
             }
             isSearchFind.observe(viewLifecycleOwner) {
-                if (it) binding!!.readWordBtn.visibility = View.VISIBLE
-                else binding!!.readWordBtn.visibility = View.GONE
+                if (it) {
+                    binding!!.readWordBtn.visibility = View.VISIBLE
+                    binding!!.addStarBtn.visibility = View.VISIBLE
+                }
+                else {
+                    binding!!.readWordBtn.visibility = View.GONE
+                    binding!!.addStarBtn.visibility = View.GONE
+                }
             }
         }
     }

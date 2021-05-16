@@ -79,8 +79,8 @@
 
     <ImageView
         android:id="@+id/readWordBtn"
-        android:layout_width="36dp"
-        android:layout_height="37dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:visibility="gone"
         android:src="@drawable/ic_baseline_volume_up_24"
         app:layout_constraintBottom_toBottomOf="@+id/searchResultWord"
@@ -89,5 +89,18 @@
         app:layout_constraintStart_toEndOf="@+id/searchResultWord"
         app:layout_constraintTop_toBottomOf="@+id/inputSearch"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/addStarBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_baseline_star_24"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/searchResultWord"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchResultWord" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
