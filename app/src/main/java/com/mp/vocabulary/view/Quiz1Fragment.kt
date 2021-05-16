@@ -123,6 +123,7 @@ class Quiz1Fragment : Fragment() {
                         viewModel.insertToNote(it.eng)
                     }
                 }
+                Toast.makeText(context, "오답노트에 등록되었습니다.", Toast.LENGTH_SHORT).show()
             }
 
             finishBtn.setOnClickListener {

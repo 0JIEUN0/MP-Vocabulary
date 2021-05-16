@@ -6,10 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import com.mp.vocabulary.data.SimpleVoca
 import com.mp.vocabulary.data.Voca
-import kotlin.math.E
-
 
 enum class DBTable {
     NOTE, STAR

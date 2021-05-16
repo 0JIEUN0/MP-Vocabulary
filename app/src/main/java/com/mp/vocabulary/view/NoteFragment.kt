@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mp.vocabulary.adapter.DetailVocaAdapter
 import com.mp.vocabulary.data.Voca
+import com.mp.vocabulary.database.DBTable
 import com.mp.vocabulary.databinding.FragmentNoteBinding
 import com.mp.vocabulary.viewmodel.VocaViewModel
 import java.util.*
@@ -22,7 +23,7 @@ class NoteFragment : Fragment() {
     val viewModel: VocaViewModel by activityViewModels()
     lateinit var tts: TextToSpeech
     val adapter: DetailVocaAdapter by lazy {
-        DetailVocaAdapter(requireContext(), ArrayList())
+        DetailVocaAdapter(DBTable.NOTE, requireContext(), ArrayList())
     }
 
     override fun onStop() {

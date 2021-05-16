@@ -11,10 +11,12 @@ import com.google.android.material.chip.Chip
 import com.mp.vocabulary.R
 import com.mp.vocabulary.data.SimpleVoca
 import com.mp.vocabulary.data.Voca
+import com.mp.vocabulary.database.DBTable
 import com.mp.vocabulary.databinding.Row1Binding
 import com.mp.vocabulary.databinding.Row2Binding
 
 class DetailVocaAdapter(
+        val TYPE: DBTable,
         val context: Context,
         var items: MutableList<Voca>):
     RecyclerView.Adapter<DetailVocaAdapter.ViewHolder>() {
@@ -77,6 +79,10 @@ class DetailVocaAdapter(
             chip.text = it
             chip.textSize = 13.0f
             holder.binding.rowChipGroup.addView(chip)
+        }
+
+        if(TYPE == DBTable.STAR) {
+            holder.binding.starBtn.visibility = View.GONE
         }
     }
 
