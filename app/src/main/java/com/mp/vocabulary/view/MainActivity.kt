@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.mp.vocabulary.R
+import com.mp.vocabulary.database.VocaDBHelper
 import com.mp.vocabulary.databinding.ActivityMainBinding
 import com.mp.vocabulary.viewmodel.FragmentRequest
 import com.mp.vocabulary.viewmodel.VocaViewModel
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, SearchFragment())
                 .commit()
+
+        viewModel.vocaDBHelper = VocaDBHelper(this)
     }
 
     private fun initViewModel() {

@@ -10,6 +10,7 @@ import com.mp.vocabulary.BuildConfig
 import com.mp.vocabulary.R
 import com.mp.vocabulary.data.QuizVoca
 import com.mp.vocabulary.data.Voca
+import com.mp.vocabulary.database.VocaDBHelper
 import com.mp.vocabulary.server.RetrofitServerManage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +43,9 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
 
     // fragment translation
     val fragmentRequest: MutableLiveData<FragmentRequest> = MutableLiveData<FragmentRequest>()
+
+    // SQLite [Database]
+    lateinit var vocaDBHelper: VocaDBHelper // MainActivity 에서 값 할당
 
     init {
         try {

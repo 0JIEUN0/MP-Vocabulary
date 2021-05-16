@@ -3,10 +3,8 @@ package com.mp.vocabulary.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mp.vocabulary.data.SimpleVoca
 import com.mp.vocabulary.databinding.Row1Binding
-
-
-data class SimpleVoca(var eng: String, var kor: String, var color: Int)
 
 class SimpleVocaAdapter(var items: ArrayList<SimpleVoca>):
 RecyclerView.Adapter<SimpleVocaAdapter.ViewHolder>(){
