@@ -117,10 +117,16 @@ class Quiz1Fragment : Fragment() {
                 }
             }
             addNoteBtn.setOnClickListener {
-
+                // 오답노트에 등록
+                quizWords.forEach {
+                    if(!it.isCorrect){
+                        viewModel.insertToNote(it.eng)
+                    }
+                }
             }
 
             finishBtn.setOnClickListener {
+                // fragment 종료
                 requireActivity().supportFragmentManager
                     .beginTransaction()
                     .remove(this@Quiz1Fragment)

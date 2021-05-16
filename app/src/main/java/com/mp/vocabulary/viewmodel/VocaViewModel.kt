@@ -9,7 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import com.mp.vocabulary.BuildConfig
 import com.mp.vocabulary.R
 import com.mp.vocabulary.data.QuizVoca
+import com.mp.vocabulary.data.SimpleVoca
 import com.mp.vocabulary.data.Voca
+import com.mp.vocabulary.database.DBTable
 import com.mp.vocabulary.database.VocaDBHelper
 import com.mp.vocabulary.server.RetrofitServerManage
 import kotlinx.coroutines.CoroutineScope
@@ -45,7 +47,11 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
     val fragmentRequest: MutableLiveData<FragmentRequest> = MutableLiveData<FragmentRequest>()
 
     // SQLite [Database]
-    lateinit var vocaDBHelper: VocaDBHelper // MainActivity 에서 값 할당
+    val vocaDBHelper: VocaDBHelper // MainActivity 에서 값 할당
+    var noteWordList: MutableList<Voca> = mutableListOf() // observer 가 인지할 수 있도록
+    val noteWordListLiveData: MutableLiveData<MutableList<Voca>> = MutableLiveData() // 오답노트에 등록한 단어들
+    var starWordList: MutableList<Voca> = mutableListOf() // observer 가 인지할 수 있도록
+    val starWordListLiveData: MutableLiveData<MutableList<Voca>> = MutableLiveData() // 즐겨찾기한 단어들
 
     init {
         try {
@@ -64,6 +70,39 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         if(!RetrofitServerManage.initRetrofit()){
             Log.e(TAG, "Server init failed...")
         } else Log.e(TAG, "Server init success!")
+
+        // init DB
+        vocaDBHelper = VocaDBHelper(application.baseContext)
+        noteWordList = vocaDBHelper.findAll(DBTable.NOTE)
+        starWordList = vocaDBHelper.findAll(DBTable.STAR)
+        noteWordListLiveData.value = noteWordList
+        starWordListLiveData.value = starWordList
+    }
+
+    fun insertToStar(data: Voca): Boolean{
+        if(starWordList.contains(data)) return false
+        val eng = data.eng
+        data.kor.forEach {
+            vocaDBHelper.insertVoca(DBTable.STAR, eng, it)
+        }
+        starWordList.add(data)
+        starWordListLiveData.value = starWordList
+        return true
+    }
+
+    fun insertToNote(eng: String): Boolean {
+        val data: Voca = words.filter {
+            it.eng == eng
+        }[0]
+
+        if(noteWordList.contains(data)) return false
+        val eng = data.eng
+        data.kor.forEach {
+            vocaDBHelper.insertVoca(DBTable.NOTE, eng, it)
+        }
+        noteWordList.add(data)
+        noteWordListLiveData.value = noteWordList
+        return true
     }
 
     fun makeQuiz(num: Int) {

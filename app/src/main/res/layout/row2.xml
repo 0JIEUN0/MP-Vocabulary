@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/base_white"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/engText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="apple"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/soundBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_volume_up_24"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/starBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="즐겨찾기"
+            android:gravity="right"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
+
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/rowChipGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_red"/>
+</LinearLayout>
