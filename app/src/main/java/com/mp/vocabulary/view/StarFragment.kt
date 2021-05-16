@@ -6,14 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mp.vocabulary.adapter.DetailVocaAdapter
 import com.mp.vocabulary.data.Voca
 import com.mp.vocabulary.database.DBTable
-import com.mp.vocabulary.databinding.FragmentNoteBinding
 import com.mp.vocabulary.databinding.FragmentStarBinding
 import com.mp.vocabulary.viewmodel.VocaViewModel
 import java.util.*
@@ -72,6 +70,10 @@ class StarFragment : Fragment() {
                     tts.speak(data.eng, TextToSpeech.QUEUE_ADD, null, null)
                 }
                 override fun onClickStar(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int) {
+                }
+                override fun onClickDelete(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int) {
+                    // 즐겨찾기에서 삭제
+                    viewModel.deleteFromStar(data)
                 }
             }
             binding!!.starRecyclerView.adapter = adapter

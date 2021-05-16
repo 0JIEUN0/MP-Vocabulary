@@ -79,6 +79,18 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         starWordListLiveData.value = starWordList
     }
 
+    fun deleteFromStar(data: Voca) {
+        vocaDBHelper.deleteVoca(DBTable.STAR, data.eng)
+        starWordList.remove(data)
+        starWordListLiveData.value = starWordList
+    }
+
+    fun deleteFromNote(data: Voca) {
+        vocaDBHelper.deleteVoca(DBTable.NOTE, data.eng)
+        noteWordList.remove(data)
+        noteWordListLiveData.value = noteWordList
+    }
+
     fun insertToStar(data: Voca): Boolean{
         if(starWordList.contains(data)) return false
         val eng = data.eng

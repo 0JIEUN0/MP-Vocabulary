@@ -26,6 +26,7 @@ class DetailVocaAdapter(
     interface OnItemClickListener {
         fun onClickSound(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int)
         fun onClickStar(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int)
+        fun onClickDelete(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int)
     }
 
     inner class ViewHolder(val binding: Row2Binding) : RecyclerView.ViewHolder(binding.root) {
@@ -42,6 +43,11 @@ class DetailVocaAdapter(
             }
             binding.starBtn.setOnClickListener {
                 itemClickListener?.onClickStar(
+                        this, it, items[adapterPosition], adapterPosition
+                )
+            }
+            binding.deleteBtn.setOnClickListener {
+                itemClickListener?.onClickDelete(
                         this, it, items[adapterPosition], adapterPosition
                 )
             }

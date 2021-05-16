@@ -68,6 +68,7 @@ class NoteFragment : Fragment() {
                 override fun onClickSound(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int) {
                     tts.speak(data.eng, TextToSpeech.QUEUE_ADD, null, null)
                 }
+
                 override fun onClickStar(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int) {
                     // 즐겨 찾기에 등록
                     if(viewModel.insertToStar(data)){
@@ -75,6 +76,11 @@ class NoteFragment : Fragment() {
                     } else {
                         Toast.makeText(context, "이미 즐겨찾기에 등록된 단어입니다.", Toast.LENGTH_SHORT).show()
                     }
+                }
+
+                override fun onClickDelete(holder: RecyclerView.ViewHolder, view: View, data: Voca, position: Int) {
+                    // 오답노트에서 삭제
+                    viewModel.deleteFromNote(data)
                 }
             }
             binding!!.noteRecyclerView.adapter = adapter
