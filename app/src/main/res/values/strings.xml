@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MP-Vocabulary</string>
+    <string name="user_privacy">
+        사용자 닉네임을 입력하면, 해당 닉네임으로 사용자 학습량이 기록됩니다.\n
+        사용자를 등록하면 이에 동의한다고 간주합니다.\n
+        사용자 닉네임은 사용자의 학습량 관리 외에는 이용되지 않습니다.\n
+        닉네임은 중복될 수 없고, 단말기 한 대에 하나의 닉네임을 생성할 수 있습니다.\n
+        학습 기록은 사용자 등록 시점부터 적용됩니다.
+    </string>
 </resources>

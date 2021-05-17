@@ -1,15 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     tools:context=".view.MypageFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment 4"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box3"
+            android:text="마이 페이지 "
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/dark_gray"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:padding="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공부 현황을 관리하고, 나만의 단어를 등록해보세요!"
+           android:layout_gravity="center"
+            android:layout_margin="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/userProfileLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="30dp">
+
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_gray"
+                android:src="@drawable/ic_baseline_person_24"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:id="@+id/userId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="아이디"
+                android:layout_gravity="center"
+                android:background="@color/base_white"
+                android:textSize="20dp"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                android:padding="20dp"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/addVocaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나만의 단어 등록하기 ▼"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/addVocaLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/base_white">
+
+            <EditText
+                android:id="@+id/addVocaEng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="영어 단어"
+                android:layout_marginHorizontal="10dp"/>
+            <EditText
+                android:id="@+id/addVocaKor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="뜻 (여러개일 경우 ','로 나열)"
+                android:layout_marginHorizontal="10dp"/>
+            <Button
+                android:id="@+id/addVocaBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록하기"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/base_beige"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나의 학습 기록"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            />
+
+        <TextView
+            android:id="@+id/addUserTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사용자 등록하기"
+            android:background="@drawable/box1"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:padding="20dp"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/userRegisterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/box1"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_privacy"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputTextUserIdLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:boxStrokeErrorColor="@color/dark_red"
+                app:boxBackgroundMode="none"
+
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextUserId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:inputType=""
+                    android:textSize="17dp"
+                    android:gravity="start"
+                    android:textColor="@color/dark_gray"
+                    android:textAlignment="viewStart"
+                    android:hint="사용자 닉네임을 입력하세요."
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/addUserBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="등록하기"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/base_beige"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/userStudyRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/base_white" />
+    </LinearLayout>
+</ScrollView>

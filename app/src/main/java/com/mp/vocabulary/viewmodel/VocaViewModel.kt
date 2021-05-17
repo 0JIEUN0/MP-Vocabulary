@@ -1,11 +1,13 @@
 package com.mp.vocabulary.viewmodel
 
 import android.app.Application
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.*
 import com.mp.vocabulary.BuildConfig
 import com.mp.vocabulary.R
 import com.mp.vocabulary.data.QuizVoca
@@ -53,6 +55,14 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
     var starWordList: MutableList<Voca> = mutableListOf() // observer 가 인지할 수 있도록
     val starWordListLiveData: MutableLiveData<MutableList<Voca>> = MutableLiveData() // 즐겨찾기한 단어들
 
+    // user
+    val userPhoneId: String
+    var userId: String? = null
+
+    // Firebase Realtime Database
+    val userDBRefetence: DatabaseReference
+
+
     init {
         try {
             val scan2 = Scanner(application.openFileInput("out.txt"))
@@ -77,6 +87,32 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         starWordList = vocaDBHelper.findAll(DBTable.STAR)
         noteWordListLiveData.value = noteWordList
         starWordListLiveData.value = starWordList
+
+        // user 단말기 정보
+        userPhoneId = Settings.Secure.getString(application.contentResolver, Settings.Secure.ANDROID_ID) // android device id
+        //userId =
+        userDBRefetence = FirebaseDatabase.getInstance().getReference("User")
+        searchUser()
+
+
+    }
+
+    fun initUser(userId: String){
+        this.userId = userId
+        userDBRefetence.child(userPhoneId).child("id").setValue(userId)
+    }
+
+    private fun searchUser(){
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                userId = dataSnapshot.child(userPhoneId).child("id").value as String?
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        userDBRefetence.addValueEventListener(postListener)
     }
 
     fun deleteFromStar(data: Voca) {
