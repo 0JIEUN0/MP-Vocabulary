@@ -13,6 +13,9 @@ import androidx.core.view.forEach
 import androidx.core.view.marginLeft
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.mp.vocabulary.data.Voca
 import com.mp.vocabulary.databinding.FragmentMypageBinding
 import com.mp.vocabulary.viewmodel.UserViewModel
@@ -42,6 +45,47 @@ class MypageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+        barChart()
+    }
+
+    private fun barChart() {
+        //if(userViewModel.userId != null) {
+        if(true) {
+            binding!!.barChart.apply {
+                visibility = View.VISIBLE
+
+
+                val tmp = mutableListOf<Int>(3, 4, 10, 30, 1)
+
+                val chartValue: MutableList<BarEntry> = mutableListOf()
+                val labels: MutableList<String> = mutableListOf()
+                var i = 0
+                tmp.forEach {
+                    val barEntry : BarEntry = BarEntry(i.toFloat(), it.toFloat(), "데이터")
+                    chartValue.add(barEntry)
+                    labels.add("$i 번째")
+                    i++
+                }
+                setTouchEnabled(false)
+                setDrawGridBackground(false)
+                description.isEnabled = false
+                legend.isEnabled = false
+
+                setFitBars(true)
+                axisRight.setDrawLabels(false)
+                xAxis.setDrawGridLines(false)
+                axisLeft.setDrawGridLines(false)
+                //animateXY(5000, 5000)
+
+                val barDataSet: BarDataSet = BarDataSet(chartValue, "hidd")
+
+                val barData = BarData(barDataSet)
+                data = barData
+                data.barWidth = 0.4f
+
+                invalidate()
+            }
+        }
     }
 
     private fun init() {
@@ -54,6 +98,7 @@ class MypageFragment : Fragment() {
             userId.text = userViewModel.userId ?: ""
             userRegisterLayout.visibility = View.GONE
             addUserBtn.isEnabled = false
+            binding!!.barChart.visibility = View.GONE
 
             inputTextUserId.addTextChangedListener {
                 if(it.toString().matches(Regex("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+\$"))){

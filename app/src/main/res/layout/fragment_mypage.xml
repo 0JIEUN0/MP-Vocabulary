@@ -195,5 +195,10 @@
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
             android:background="@color/base_white" />
+
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
     </LinearLayout>
 </ScrollView>

@@ -41,6 +41,10 @@ android {
     viewBinding {
         enabled = true
     }
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 
 dependencies {
@@ -67,4 +71,6 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
