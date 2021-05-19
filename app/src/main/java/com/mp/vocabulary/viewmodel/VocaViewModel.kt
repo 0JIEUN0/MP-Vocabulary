@@ -1,6 +1,9 @@
 package com.mp.vocabulary.viewmodel
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.content.Intent
 import android.provider.Settings
 import android.util.Log
 import android.view.View
@@ -20,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.PrintStream
 import java.lang.Exception
 import java.util.*
 
@@ -95,6 +99,19 @@ class VocaViewModel(application: Application) : AndroidViewModel(application){
         searchUser()
 
 
+    }
+
+    fun addUserVoca(outputStream: PrintStream, data: Voca) {
+        var korStr = ""
+        data.kor.forEach { korStr += it.trim() + "/" }
+        korStr = korStr.substring(0, korStr.length -1)
+
+        outputStream.print("${data.eng}:")
+        outputStream.println(korStr)
+        outputStream.close()
+
+        words.add(data)
+        engs.add(data.eng)
     }
 
     fun initUser(userId: String){

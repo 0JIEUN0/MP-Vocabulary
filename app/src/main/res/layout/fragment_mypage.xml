@@ -78,7 +78,8 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/base_white">
+            android:background="@color/base_white"
+            android:padding="10dp">
 
             <EditText
                 android:id="@+id/addVocaEng"
@@ -86,12 +87,30 @@
                 android:layout_height="wrap_content"
                 android:hint="영어 단어"
                 android:layout_marginHorizontal="10dp"/>
-            <EditText
-                android:id="@+id/addVocaKor"
+
+            <LinearLayout
+                android:id="@+id/korEditTexts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="뜻 (여러개일 경우 ','로 나열)"
-                android:layout_marginHorizontal="10dp"/>
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/kor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="뜻"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/addKorEditTextBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="20dp"
+                android:layout_marginTop="-20dp"
+                android:gravity="left"
+                android:padding="15dp"/>
             <Button
                 android:id="@+id/addVocaBtn"
                 android:layout_width="wrap_content"

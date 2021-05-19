@@ -1,15 +1,22 @@
 package com.mp.vocabulary.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.forEach
+import androidx.core.view.marginLeft
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import com.mp.vocabulary.data.Voca
 import com.mp.vocabulary.databinding.FragmentMypageBinding
 import com.mp.vocabulary.viewmodel.VocaViewModel
+import java.io.PrintStream
 
 class MypageFragment : Fragment() {
     var binding: FragmentMypageBinding? = null
@@ -77,14 +84,55 @@ class MypageFragment : Fragment() {
                 addVocaLayout.visibility = if(addVocaLayout.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             }
             addVocaBtn.setOnClickListener {
-                if(addVocaEng.text.toString() == "" || addVocaKor.text.toString() == ""){
+                val eng = addVocaEng.text.toString()
+                if(eng == "") {
                     Toast.makeText(requireContext(), "등록할 단어를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
                 } else {
-                    // 단어 등록하기
-                    addVocaTextView.visibility = View.GONE
-                    Toast.makeText(requireContext(), "단어가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                    val meaningList = mutableListOf<String>()
+                    korEditTexts.forEach {
+                        val editText = it as EditText
+                        if(editText.text.toString() != "") {
+                            meaningList.add(editText.text.toString())
+                        }
+                    }
+                    if(meaningList.size == 0) {
+                        Toast.makeText(requireContext(), "등록할 단어를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        if(viewModel.engs.contains(eng)) {
+                            clearAddVocaView()
+                            Toast.makeText(requireContext(), "이미 등록된 단어입니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+                            // 단어 등록하기
+                            clearAddVocaView()
+                            val output = PrintStream(requireActivity().openFileOutput("out.txt", Context.MODE_APPEND))
+                            viewModel.addUserVoca(output, Voca(
+                                    eng = eng,
+                                    kor = meaningList
+                            ))
+                            Toast.makeText(requireContext(), "단어 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
+            addKorEditTextBtn.setOnClickListener {
+                val editText: EditText = EditText(requireActivity())
+                editText.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                editText.hint = "뜻"
+                korEditTexts.addView(editText)
+            }
+        }
+    }
+
+    private fun clearAddVocaView() {
+        binding!!.apply {
+            addVocaEng.setText("")
+            korEditTexts.removeAllViews()
+            val editText: EditText = EditText(requireActivity())
+            editText.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            editText.hint = "뜻"
+            korEditTexts.addView(editText)
         }
     }
 }
