@@ -126,6 +126,8 @@ class Quiz2Fragment : Fragment() {
                     quizLayout.visibility = View.GONE
                     resultLayout.visibility = View.VISIBLE
                     showResult()
+
+                    if(userViewModel.userId != null) userViewModel.addStudyingAmount(quizWords.size)
                 }
             }
             addNoteBtn.setOnClickListener {
