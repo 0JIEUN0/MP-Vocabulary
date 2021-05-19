@@ -15,12 +15,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.mp.vocabulary.data.Voca
 import com.mp.vocabulary.databinding.FragmentMypageBinding
+import com.mp.vocabulary.viewmodel.UserViewModel
 import com.mp.vocabulary.viewmodel.VocaViewModel
 import java.io.PrintStream
 
 class MypageFragment : Fragment() {
     var binding: FragmentMypageBinding? = null
     val viewModel: VocaViewModel by activityViewModels()
+    val userViewModel: UserViewModel by activityViewModels()
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -44,12 +46,12 @@ class MypageFragment : Fragment() {
 
     private fun init() {
         binding!!.apply {
-            if (viewModel.userId  == null){
+            if (userViewModel.userId  == null){
                 addUserTextView.visibility = View.VISIBLE
             } else {
                 addUserTextView.visibility = View.GONE
             }
-            userId.text = viewModel.userId ?: ""
+            userId.text = userViewModel.userId ?: ""
             userRegisterLayout.visibility = View.GONE
             addUserBtn.isEnabled = false
 
@@ -67,7 +69,7 @@ class MypageFragment : Fragment() {
 
             addUserBtn.setOnClickListener {
                 val inputUserId = inputTextUserId.text.toString()
-                viewModel.initUser(inputUserId)
+                userViewModel.initUser(inputUserId)
                 userId.text = inputUserId
                 // 레이아웃 감추기
                 userRegisterLayout.visibility = View.GONE

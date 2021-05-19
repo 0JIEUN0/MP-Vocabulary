@@ -14,6 +14,7 @@ import com.mp.vocabulary.R
 import com.mp.vocabulary.adapter.SimpleVocaAdapter
 import com.mp.vocabulary.data.QuizVoca
 import com.mp.vocabulary.databinding.FragmentQuiz1Binding
+import com.mp.vocabulary.viewmodel.UserViewModel
 import com.mp.vocabulary.viewmodel.VocaViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -21,6 +22,7 @@ import kotlin.collections.ArrayList
 class Quiz1Fragment : Fragment() {
     var binding: FragmentQuiz1Binding? = null
     val viewModel: VocaViewModel by activityViewModels()
+    val userViewModel: UserViewModel by activityViewModels()
     var quizWords: MutableList<QuizVoca> = mutableListOf()
     val chipArray = intArrayOf(R.id.chip1, R.id.chip2, R.id.chip3, R.id.chip4)
     val random: Random = Random()

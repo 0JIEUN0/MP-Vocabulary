@@ -15,6 +15,7 @@ import com.mp.vocabulary.R
 import com.mp.vocabulary.adapter.SimpleVocaAdapter
 import com.mp.vocabulary.data.QuizVoca
 import com.mp.vocabulary.databinding.FragmentQuiz2Binding
+import com.mp.vocabulary.viewmodel.UserViewModel
 import com.mp.vocabulary.viewmodel.VocaViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,6 +24,7 @@ class Quiz2Fragment : Fragment() {
     var binding: FragmentQuiz2Binding? = null
     lateinit var tts: TextToSpeech
     var isTtsReady = false
+    val userViewModel: UserViewModel by activityViewModels()
 
     val viewModel: VocaViewModel by activityViewModels()
     var quizWords: MutableList<QuizVoca> = mutableListOf()
