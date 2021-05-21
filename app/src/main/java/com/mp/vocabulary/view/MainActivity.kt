@@ -3,16 +3,19 @@ package com.mp.vocabulary.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.mp.vocabulary.R
 import com.mp.vocabulary.databinding.ActivityMainBinding
 import com.mp.vocabulary.viewmodel.FragmentRequest
+import com.mp.vocabulary.viewmodel.UserViewModel
 import com.mp.vocabulary.viewmodel.VocaViewModel
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     val viewModel: VocaViewModel by viewModels()
+    val userViewModel: UserViewModel by viewModels()
     var fragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         init()
         initViewModel()
+
+        Log.d("MainActivity", userViewModel.userId ?: "null")
 
         binding.menuBottom.setItemSelected(R.id.searchMenu, true)
         supportFragmentManager.beginTransaction()

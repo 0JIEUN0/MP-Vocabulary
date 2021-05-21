@@ -121,13 +121,18 @@ class Quiz2Fragment : Fragment() {
                     }
                 }
                 else if(chooseBtn.text == "결과"){
-                    userChoose()
-                    viewModel.isQuizOk.value = false
-                    quizLayout.visibility = View.GONE
-                    resultLayout.visibility = View.VISIBLE
-                    showResult()
+                    if(chipGroupQuiz.checkedChipId == View.NO_ID){
+                        Toast.makeText(context, "하나를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        userChoose()
+                        viewModel.isQuizOk.value = false
+                        quizLayout.visibility = View.GONE
+                        resultLayout.visibility = View.VISIBLE
+                        showResult()
 
-                    if(userViewModel.userId != null) userViewModel.addStudyingAmount(quizWords.size)
+                        if(userViewModel.userId != null) userViewModel.addStudyingAmount(quizWords.size)
+                    }
                 }
             }
             addNoteBtn.setOnClickListener {

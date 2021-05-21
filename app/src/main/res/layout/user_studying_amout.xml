@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- 공부 정도 (학습량. 문제 풀이 개수 기준)
+        base_yellow: 0~5개
+        yellow_200: 6개~20개
+        yellow_300: 21개~40개
+        yellow_500: 41개~
+        -->
+
+        <View
+            android:id="@+id/mon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/base_yellow"
+            android:layout_margin="2dp"/>
+
+        <View
+            android:id="@+id/tue"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/yellow_500"
+            android:layout_margin="2dp"/>
+
+        <View
+            android:id="@+id/wed"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/yellow_300"
+            android:layout_margin="2dp"/>
+        <View
+            android:id="@+id/thu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/base_yellow"
+            android:layout_margin="2dp"/>
+
+        <View
+            android:id="@+id/fri"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/yellow_200"
+            android:layout_margin="2dp"/>
+        <View
+            android:id="@+id/sat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/yellow_300"
+            android:layout_margin="2dp"/>
+        <View
+            android:id="@+id/sun"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/yellow_300"
+            android:layout_margin="2dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        android:text="최근 7일간의 학습량입니다."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가장 최근에 학습한 날은 00 입니다."
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/showColorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="색상별 의미 ▼"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        />
+    <LinearLayout
+        android:id="@+id/showColorMean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp">
+            <View
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/base_yellow"
+                android:layout_margin="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0~5개 학습"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp">
+            <View
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/yellow_200"
+                android:layout_margin="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6개~20개 학습"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp">
+            <View
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/yellow_300"
+                android:layout_margin="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21개~40개 학습"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp">
+            <View
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/yellow_500"
+                android:layout_margin="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="41개 이상 학습"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
